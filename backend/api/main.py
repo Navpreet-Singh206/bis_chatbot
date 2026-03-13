@@ -2,7 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
-import sys, os
+import sys
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
@@ -28,31 +32,34 @@ def load_modules():
         answer_fn = generate_answer
         print("Modules loaded successfully")
 
-
 class ChatMessage(BaseModel):
     user: str
     assistant: str
 
-
 class Question(BaseModel):
     question: str
-    history: Optional[List[ChatMessage]] = []
+    history: Optional[List[ChatMessage]] = None
 
+@app.post("/ask")
+def ask(q: Question):
+    try:
+        load_modules()
+        chunks = search_fn(q.question, top_k=5)
+        history_list = [{"user": h.user, "assistant": h.assistant} for h in (q.history or [])]
+        result = answer_fn(q.question, chunks, chat_history=history_list)
+        return result
+    except Exception as e:
+        print(f"API Error: {e}")
+        return {
+            "answer": "BIS (Bureau of Indian Standards) handles product certification (ISI mark), hallmarking, standards. Ask about certification process, hallmarking, or schemes. Sources: bis.gov.in",
+            "sources": ["https://www.bis.gov.in"]
+        }
 
 @app.get("/")
 def root():
     return {"status": "BIS Chatbot API running"}
 
-
 @app.get("/health")
 def health():
     return {"health": "ok"}
 
-
-@app.post("/ask")
-def ask(q: Question):
-    load_modules()
-    chunks = search_fn(q.question, top_k=5)
-    history = [{"user": h.user, "assistant": h.assistant} for h in q.history]
-    result = answer_fn(q.question, chunks, chat_history=history)
-    return result

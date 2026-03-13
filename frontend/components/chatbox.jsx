@@ -8,7 +8,11 @@ import { Bot, User, Loader2 } from 'lucide-react';
 
 export default function Chatbox() {
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Hello! 🤖 I am your BIS Assistant. Ask me about Bureau of Indian Standards, ISI certification, hallmarking, or how to get your product certified.' }
+    { 
+      role: 'assistant', 
+      content: 'Hello! 🤖 I am your BIS Assistant. Ask me about Bureau of Indian Standards, ISI certification, hallmarking, or how to get your product certified.',
+      sources: []
+    }
   ]);
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
@@ -22,26 +26,26 @@ export default function Chatbox() {
   }, [messages]);
 
   const handleSend = async (question) => {
-    setMessages(prev => [...prev, { role: 'user', content: question }]);
+    const userMessage = { role: 'user', content: question, sources: [] };
+    setMessages(prev => [...prev, userMessage]);
     setLoading(true);
 
     try {
       const history = messages.filter(m => m.role !== 'system');
       const response = await sendMessage(question, history);
       
-      let fullResponse = response.answer || 'No response received';
-      if (response.sources && response.sources.length > 0) {
-        const sourceStr = '\n\nSources: ' + response.sources.join(', ');
-        if (!fullResponse.includes('Sources:')) {
-          fullResponse += sourceStr;
-        }
-      }
+      const assistantMessage = { 
+        role: 'assistant', 
+        content: response.answer || 'No response received.',
+        sources: response.sources || [] 
+      };
       
-      setMessages(prev => [...prev, { role: 'assistant', content: fullResponse }]);
+      setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: 'Sorry, I encountered an error. Please try again.' 
+        content: 'Sorry, I encountered an error. Please try again.',
+        sources: []
       }]);
     } finally {
       setLoading(false);
@@ -67,6 +71,7 @@ export default function Chatbox() {
           <MessageBubble 
             key={index} 
             message={msg.content} 
+            sources={msg.sources || []}
             isUser={msg.role === 'user'} 
             avatar={msg.role === 'assistant' ? <Bot className="avatar-icon" /> : <User className="avatar-icon user-avatar" />}
           />
@@ -89,4 +94,3 @@ export default function Chatbox() {
     </div>
   );
 }
-
