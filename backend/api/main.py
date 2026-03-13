@@ -27,7 +27,7 @@ def load_modules():
     global search_fn, answer_fn
     if search_fn is None:
         from rag.pipeline import search
-        from llm.gemini_client import generate_answer
+        from llm.groq_client_fixed import generate_answer
         search_fn = search
         answer_fn = generate_answer
         print("Modules loaded successfully")
@@ -51,8 +51,8 @@ def ask(q: Question):
     except Exception as e:
         print(f"API Error: {e}")
         return {
-            "answer": "BIS (Bureau of Indian Standards) handles product certification (ISI mark), hallmarking, standards. Ask about certification process, hallmarking, or schemes. Sources: bis.gov.in",
-            "sources": ["https://www.bis.gov.in"]
+            "answer": f"Sorry, there was an error processing your request. Error details: {str(e)}. Please try asking about BIS certification or standards.",
+            "sources": []
         }
 
 @app.get("/")

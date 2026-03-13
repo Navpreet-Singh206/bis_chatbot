@@ -8,3 +8,4 @@ firecrawl-py
 requests
 beautifulsoup4
 click
+groq

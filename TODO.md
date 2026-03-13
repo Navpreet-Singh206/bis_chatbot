@@ -1,15 +1,16 @@
-# FIXED: No Duplicates, Longer Answers (v2)
+# BIS Chatbot Fix COMPLETE ✅
 
-✅ **API & Retrieval** (`route.js`):
-- Fixed chunks.json parsing (strings + metadata)
-- Improved weighted search + always fallback
-- STRICT prompt: NO "Sources:" text (all in system)
-- max_tokens=2000, temp=0.0 → detailed 500-1200 words
+## Backend Fixed
+- [DONE] groq installed, test_llm.py passes
+- [RUNNING] uvicorn on http://127.0.0.1:8000
 
-✅ **UI Clean** (`MessageBuble.jsx`):
-- Strip leaked "Sources: ..." regex before render
-- ONLY clickable footer sources (no text dupes)
+## Frontend Next
+1. cd frontend
+2. npm i  (if needed)
+3. npm run dev  → http://localhost:3000
 
-**Test:** `cd frontend & npm run dev` (Windows cmd uses &)
+## E2E Test
+- Open frontend
+- Ask "BIS certification process?" → Should get RAG + Groq answer, no error!
 
-Expected: Pure long answers + single clickable sources list
+To run always: Use backend/run_backend.bat + frontend/run_frontend.bat

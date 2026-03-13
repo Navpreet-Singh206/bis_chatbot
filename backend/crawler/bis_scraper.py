@@ -20,6 +20,9 @@ URLS = [
     "https://www.bis.gov.in/about-bis/?lang=en",
     "https://www.bis.gov.in/hallmarking/?lang=en",
     "https://www.bis.gov.in/laboratory-services/?lang=en",
+    "https://www.bis.gov.in/press-releases/?lang=en",
+    "https://www.bis.gov.in/publications/?lang=en",
+    "https://www.bis.gov.in/annual-reports/?lang=en",
 ]
 
 OUTPUT_PATH = os.path.join(

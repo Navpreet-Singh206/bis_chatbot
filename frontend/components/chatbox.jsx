@@ -4,13 +4,13 @@ import { useState, useRef, useEffect } from 'react';
 import MessageBubble from './MessageBuble';
 import InputBar from './InputBar';
 import { sendMessage } from '../services/api';
-import { Bot, User, Loader2 } from 'lucide-react';
+import { User, Loader2 } from 'lucide-react';
 
 export default function Chatbox() {
   const [messages, setMessages] = useState([
     { 
       role: 'assistant', 
-      content: 'Hello! 🤖 I am your BIS Assistant. Ask me about Bureau of Indian Standards, ISI certification, hallmarking, or how to get your product certified.',
+      content: 'Hello! I am your BIS Assistant. Ask me about Bureau of Indian Standards, ISI certification, hallmarking, or how to get your product certified.',
       sources: []
     }
   ]);
@@ -56,12 +56,10 @@ export default function Chatbox() {
     <div className="chatbox">
       <div className="chat-header">
         <div className="header-content">
-          <div className="robot-logo">
-            <Bot className="robot-icon" />
-          </div>
+          <img src="/bis-logo.webp" alt="BIS Logo" width={48} height={48} className="robot-icon" />
           <div>
-            <h1>BIS Robot Assistant</h1>
-            <p>🤖 Your AI expert for BIS certification</p>
+            <h1>BIS Assistant</h1>
+            <p>🤖 Your AI expert for BIS queries</p>
           </div>
         </div>
       </div>
@@ -73,17 +71,17 @@ export default function Chatbox() {
             message={msg.content} 
             sources={msg.sources || []}
             isUser={msg.role === 'user'} 
-            avatar={msg.role === 'assistant' ? <Bot className="avatar-icon" /> : <User className="avatar-icon user-avatar" />}
+            avatar={msg.role === 'assistant' ? <img src="/bis-logo.webp" alt="BIS" width={32} height={32} className="avatar-icon" /> : <User className="avatar-icon user-avatar" />}
           />
         ))}
         {loading && (
           <div className="message-bubble assistant">
             <div className="avatar">
-              <Bot className="avatar-icon" />
+              <img src="/bis-logo.webp" alt="BIS" width={32} height={32} className="avatar-icon" />
             </div>
             <div className="typing-container">
               <Loader2 className="typing-dots" />
-              <div className="typing-text">BIS Robot is thinking...</div>
+              <div className="typing-text">BIS Assistant is thinking...</div>
             </div>
           </div>
         )}

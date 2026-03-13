@@ -37,7 +37,61 @@
     "The BIS online portal manakonline.in is the official platform for all certification related activities. Manufacturers can: register online, submit application for product certification, track application status, pay fees online, download license certificates, and manage their profile. The portal also provides list of Indian Standards, recognized la",
     "The ISI Mark is a certification mark issued by BIS for product quality and safety. Products bearing ISI mark have been tested as conforming to Indian Standards. Benefits of ISI mark include: consumer trust and confidence, legal acceptance as proof of quality, competitive advantage in market, and compliance with regulatory requirements. The ISI mark",
     "is one of the most recognized quality marks in India.",
-    "BIS has regional offices in major Indian cities: Delhi (North), Mumbai (West), Kolkata (East), Chennai (South), Bangalore, Hyderabad, and Ahmedabad. Additionally, BIS has branch offices in over 30 cities across India. Contact details are available on bis.gov.in. Customers can visit nearest office for certification queries, complaints, and general i"
+    "BIS has regional offices in major Indian cities: Delhi (North), Mumbai (West), Kolkata (East), Chennai (South), Bangalore, Hyderabad, and Ahmedabad. Additionally, BIS has branch offices in over 30 cities across India. Contact details are available on bis.gov.in. Customers can visit nearest office for certification queries, complaints, and general i",
+    "FOSS × BIS Hackathon  —  Problem Statement & Test Cases    |    CONFIDENTIAL — DO NOT DISTRIBUTE \nBIS × FOSS Hackathon 2026  —  AI Website Chatbot ChallengePage 1 \n \n🏆  FOSS × BIS HACKATHON \nAI-Powered Website Chatbot Challenge \nProblem Statement, Test Cases & Judging Criteria  —  24-Hour Sprint \n \n1. Challenge Overview \nYou have 24 hours to build",
+    "an AI-powered chatbot that can answer any question about the BIS website \n(bis.gov.in) — accurately, conversationally, and with source citations. The core technology is a RAG (Retrieval-\nAugmented Generation) pipeline that you will build from scratch. \n \nThe chatbot must crawl, index, and understand content from across the full BIS website — includ",
+    "ing standards, \ncertification schemes, laboratory services, consumer programmes, publications, press releases, and more — and \nsurface precise answers from anywhere on the site. \n \nThe BIS Website — Your Knowledge Source \nThe Bureau of Indian Standards (bis.gov.in) is India's national standards body. Its website spans \ndozens of pages covering prod",
+    "uct certification schemes, laboratory accreditation, standards \ndevelopment, consumer affairs, international relations, publications, legislation, and more. Your \nchatbot must index and understand all of it. \n \n \n2. Problem Statement \nThe BIS website currently has no intelligent assistant. Users searching for certification processes, scheme details",
+    ", \nfee structures, or policy information must manually navigate through multiple pages, skim through content, and \npiece together answers themselves. This creates three distinct problems: \n \n    \nProblem 1 — Search Returns Links, Not Answers \nTraditional keyword search returns a list of pages. Users must read, skim, and guess which section \ncontain",
+    "s what they need. \n       \nProblem 2 — Content is Scattered Across Many Pages \nThe BIS website spans dozens of pages across standards, schemes, labs, consumer programmes, \npublications, and more. Answers are often split across multiple sections.",
+    "Problem 3 — Frustration Drives Disengagement \nWhen users cannot find answers, they raise support queries or abandon the site entirely. Poor \ndiscoverability is a silent driver of disengagement. \n \n \n3. What You Are Building \\n\\nFOSS × BIS Hackathon  —  Problem Statement & Test Cases    |    CONFIDENTIAL — DO NOT DISTRIBUTE \nBIS × FOSS Hackathon 202",
+    "6  —  AI Website Chatbot ChallengePage 2 \nA drop-in chatbot widget powered by a custom RAG pipeline that ingests and indexes the full BIS website and \nanswers user questions with grounded, cited responses. \n \nRequired Pipeline \n \nStage Name What Happens \n1 Ingest Recursively crawl all pages across bis.gov.in — standards, certification, labs, \npubli",
+    "cations, news, FAQs, consumer programmes \n2 Chunk Split content into ~500-token overlapping passages; preserve headings and \nstructural units \n3 Embed Convert chunks to vector representations using an embedding model (e.g. text-\nembedding-3-small) \n4 Store Index vectors + metadata (URL, title, content type, timestamp) in a vector \ndatabase \n5 Retri",
+    "eve Find the top-K most relevant chunks for any user query via cosine similarity \nsearch \n6 Answer Pass retrieved context to an LLM with a grounding prompt; stream the response \nto the UI \n \nRequired Deliverables \n• GitHub repository with all code written during the hackathon \n• README.md with setup instructions, architecture overview, and tools us",
+    "ed \n• Live deployed demo (Vercel, Railway, Render, or equivalent) \n• Architecture diagram showing the full RAG pipeline \n• Working chatbot indexed on real BIS website content \n \n \n4. Open Test Cases — Evaluated Live During Demo \nThese 5 test cases are known to you in advance. Your chatbot will be asked these exact questions (or close \nvariants) dur",
+    "ing the live demo. Each is worth 4 points. Judges will verify answer accuracy, source citation quality, \nand response behaviour. \n \nHow Judging Works \nDuring your demo, judges will type each query directly into your chatbot. They wil",
+    "l assess: (a) \nwhether the answer is factually correct and grounded in BIS website content, (b) whether a valid \nsource URL is cited, and (c) whether the chatbot behaves gracefully under edge conditions. \n \n# Scenario What the Chatbot Must Do Pass Condition \nTC-01 Basic Fact RetrievalQuery: \n\"What is BIS and what are \nits core functions?\" \nRetrieve",
+    "relevant content from the About / \nOverview section of the BIS website and \nreturn an accurate, concise answer \ngrounded in that content. \nAnswer is factually correct, \ncites source URL, contains \nno fabricated claims. \\n\\nFOSS × BIS Hackathon  —  Problem Statement & Test Cases    |    CONFIDENTIAL — DO NOT DISTRIBUTE \nBIS × FOSS Hackathon 2026  —",
+    "AI Website Chatbot ChallengePage 3 \n# Scenario What the Chatbot Must Do Pass Condition \nTC-02 Standards & \nCertificationQuery: \"How do I \napply for a BIS certification \nfor my product?\" \nLocate the certification / scheme pages, \nextract the correct process steps, and \npresent them in a readable, structured \nformat with source links. \nCorrect proc",
+    "ess outlined, \nat least one source citation, \nno hallucinated \nrequirements. \nTC-03 Multi-turn ConversationTurn \n1: \"What schemes does BIS \noffer?\"Turn 2: \"Tell me more \nabout the third one.\" \nMaintain conversation context across turns. \nTurn 2 must resolve 'the third one' without \nthe user restating the topic. \nTurn 2 correctly references \nthe sch",
+    "eme named in Turn \n1. No context loss. \nTC-04 Cross-Section \nRetrievalQuery: \"What is BIS \ndoing in the area of \nconsumer awareness?\" \nPull relevant content from multiple sections \n(e.g. press releases, programmes, \npublications) and synthesise a coherent \nanswer. \nAnswer draws from 2+ \ncontent types, cites distinct \nsource URLs, answer is \ncoheren",
+    "t. \nTC-05 Graceful Out-of-Scope \nHandlingQuery: \"What is the \ncurrent stock price of Tata \nSteel?\" \nRecognise the query is outside the scope of \nthe indexed BIS website and respond \ngracefully without fabricating an answer. \nChatbot declines to \nansw",
+    "er, explains it can \nonly answer from BIS \nwebsite content, suggests \na relevant BIS topic if \npossible. \n \n \n5. Hidden Test Cases — Revealed After Submission \nThese 10 additional scenarios will be evaluated after submissions close. You will not see the exact queries in \nadvance. They are designed to stress-test the depth of your RAG pipeline acros",
+    "s harder retrieval scenarios, multi-\nturn memory, and adversarial probes. \n \n🔒 Why Hidden Test Cases? \nThe hidden cases reward teams who build genuinely robust systems rather than demo-polished \nprototypes. They test cross-page synthesis, hallucination resistance, precise fact retrieval, multi-turn \nmemory, and handling of ambiguous or adversarial",
+    "queries. Each hidden case is worth 2 points (20 \npoints total). \n \n# Domain Question Type Why It’s Hard \nHTC-\n01 \nLaboratory \nServices \nSpecific service lookup Requires navigating nested lab/testing \npages \nHTC-\n02 \nLegislation & Acts Policy/legal content Legal language needs precise retrieval, no \nparaphrase errors \nHTC-\n03 \nInternational \nRelatio",
+    "ns \nCross-page synthesis Content spread across multiple \ninternational cooperation pages \nHTC-\n04 \nGrievance / \nComplaints \nProcess + contact info Tests whether contact details and steps \nare retrieved together \nHTC-\n05 \nPublications & \nReports \nDocument discovery Must surface specific reports, not just the \npublications index \nHTC-\n06 \nHallucinati",
+    "on probe Invented regulation check Query references a non-existent BIS rule \n— bot must not fabricate \nHTC-\n07 \nMultilingual intent English query, Hindi-labelled content Tests robustness when indexed content \nhas mixed-language labels \\n\\nFOSS × BIS Hackathon  —  Problem Statement & Test Cases    |    CONFIDENTIAL — DO NOT DISTRIBUTE \nBIS × FOSS Ha",
+    "ckathon 2026  —  AI Website Chatbot ChallengePage 4 \n# Domain Question Type Why It’s Hard \nHTC-\n08 \nNumerical/date \nfacts \nFee or timeline lookup Precise numeric facts must match source \nexactly \nHTC-\n09 \nFollow-up pronoun \nresolution \nMulti-turn (3",
+    "turns) Third turn uses ambiguous pronoun — \ncontext must be retained \nHTC-\n10 \nComparative query Side-by-side scheme comparison Requires retrieving and comparing content \nfrom two separate pages \n \nNote: Exact queries for each hidden test case will be released to all teams simultaneously immediately after the \nsubmission deadline. Results will be e",
+    "valuated by the judging panel. \n \n \n6. Scoring Breakdown \n \nCategory Points Notes \nTechnical Implementation 25 End-to-end RAG pipeline, ingestion quality, retrieval \naccuracy \nAnswer Quality & Accuracy 25 Grounded answers, zero hallucinations, correct \ncitations \n5 Open Test Cases 20 4 points each — judged live during demo \n10 Hidden Test Cases 20",
+    "2 points each — evaluated post-submission \nInnovation & UX 10 Creative features, UI polish, unique approach \nTOTAL 100  \n \nTip: The open and hidden test cases together account for 40 points — nearly half the total score. Teams \nwho invest in retrieval quality, grounding, and citation accuracy will have a significant advantage. \n \n \n7. What Judges L",
+    "ook For \n \n7.1 Technical Implementation (25 pts) \n• Does the ingestion pipeline handle the full breadth of content types on the BIS website? \n• Does semantic retrieval surface genuinely relevant chunks — not just keyword matches? \n• Is the LLM answer strictly grounded in retrieved context, with no fabrication? \n• Is the pipeline architecturally sou",
+    "nd and maintainable? \n \n7.2 Answer Quality & Accuracy (25 pts) \n• Every claim in the answer must be traceable to a retrieved chunk from the BIS website. \n• Zero hallucinations — if the answer is not in the indexed content, the bot must say so. \n• Source citations must link to the actual page where the content was found. \\n\\nFOSS × BIS Hackathon  —",
+    "Problem Statement & Test Cases    |    CONFIDENTIAL — DO NOT DISTRIBUTE \nBIS × FOSS Hackathon 2026  —  AI Website Chatbot ChallengePage 5 \n• Multi-turn context must be maintained coherently across the conversation. \n \n7.3 Test Case Performance (40 p",
+    "ts) \n• 5 Open Cases (4 pts each): Evaluated live during the demo presentation. \n• 10 Hidden Cases (2 pts each): Evaluated by the panel after submission closes. \n• Partial credit may be awarded for partially correct or well-reasoned answers. \n \n7.4 Innovation & UX (10 pts) \n• Novel retrieval strategies: hybrid search, re-ranking, query rewriting. \n•",
+    "UI polish: streaming responses, readable citations, content-type labels. \n• Creative features: follow-up suggestions, scope filters, feedback mechanism. \n \n \n8. 24-Hour Timeline \n \nTime Window Phase Goal \nHour 0–3 Setup & Scaffolding Project init, API keys, vector DB index, site crawl plan \nHour 3–10 Ingestion Pipeline Crawler, chunking, embedding",
+    ", vector upsert — full BIS site \nindexed \nHour 10–16 Query API Semantic search endpoint, prompt engineering, streaming \nresponse \nHour 16–20 Chat Widget Frontend component, streaming display, source citations \nHour 20–22 Polish & Testing Edge cases, cross-section retrieval quality, mobile \nresponsiveness \nHour 22–23 Demo Prep Final deploy, slides,",
+    "rehearsal against the 5 open test cases \nHour 24 Submission + \nPresentations \nGitHub repo submitted; live demo to judges \n \nThe 5 open test cases are published at Hour 0. Use them to guide your development and prioritise \nretrieval quality from the start. \n \n \n9. Rules Summary \n• Teams of 2–5 registered participants only. \n• All code must be writte",
+    "n during the hackathon window (Hour 0 to Hour 24). \n• The chatbot must be indexed on real BIS website content (bis.gov.in). \n• A working live demo must be presented — pre-recorded video alone is not accepted. \n• Any public LLM provider, vector database, and open-source library is permitted. \n• Starter code or boilerplate created before the event is",
+    "not permitted. \n• Source code must be submitted via the designated GitHub repository before the deadline. \n \\n\\nFOSS × BIS Hackathon  —  Problem Statement & Test Cases    |    CONFIDENTIAL — DO NOT DISTRIBUTE \nBIS × FOSS Hackathon 2026  —  AI Websit",
+    "e Chatbot ChallengePage 6 \n \n10. Suggested Tech Stack(Optional) \nThe following is a recommendation, not a requirement. Use whatever tools let your team build the best system. \n \nLayer Recommended Options \nLLM Gemini 2.5,Llama 3,Mistral 7B,Mixtral 8x7B,Phi-3,Gemma \nEmbeddings text-embedding-3-small, all-MiniLM-L6-v2 \nVector Database Pinecone, Weavia",
+    "te, Qdrant, pgvector \nSite Crawler Crawlee, Scrapy, Firecrawl, sitemap parsers \nRAG Framework LangChain.js, LlamaIndex, Haystack \nBackend Framework Next.js 15, Remix, FastAPI \nStreaming / Memory Redis, Upstash, Server-Sent Events (SSE) \nUI Components Tailwind CSS, shadcn/ui \nDeployment Vercel, Railway, Render \n \n \n \nGood luck. Build something great",
+    ". \nFOSS × BIS Hackathon  —  AI Website Chatbot Challenge  —  24 Hours \n \\n\\n       Draft Standards Preparation Activity  \nPre-Standardisation Study\nTopic : Performance and Accuracy of Fitness Wearables\nSubmission link : https://forms.gle/Us5zR6FFGeNevcSs6  \nSubmission deadline : 12 March 2026\nActivity     Overview      \nParticipants will take part",
+    "in a Draft Standards Preparation Activity, simulating the standard \ndevelopment process followed by the Bureau of Indian Standards (BIS).\nEach team will prepare a Pre-Standardisation Study Report proposing draft standards for the given \ntopic.\nThe objective of this activity is to help participants understand:\n How product quality standards are dev",
+    "eloped\n How performance benchmarks are defined\n How testing methodologies are proposed\nTopic     for     the     Study      \nPerformance and Accuracy of Fitness Wearables\nParticipants will study consumer wearable devices. These include:\n• Smartwatches (e.g. Apple Watch, Samsung Galaxy Watch): multifunctional devices that track \nhealth metrics alo",
+    "ngside notifications and apps\n• Fitness Bands (e.g. Mi Band, Fitbit): simpler, dedicated devices focused on activity and health \ntracking\n• Health Monitoring Wearables (e.g. pulse oximeters, ECG patches): devices designed specifically \nto monitor med",
+    "ical or clinical health parameters\nThe goal is to propose standard guidelines for measuring how well these devices actually perform.  \nIn other words: when your watch says your heart rate is 72 BPM or you've walked 8,000 steps, how do we \nknow if that's true?\nYour report should define:\n•  What should be tested (e.g. heart rate accuracy, step counti",
+    "ng)\n• How it should be tested (e.g. comparing against medical-grade equipment)\n• What counts as acceptable (e.g. heart rate readings within ±5 BPM of the actual value)\\n\\nThink of it as writing the rulebook that manufacturers would have to follow before claiming their device is\naccurate.\nWhat     Participants     Need     To     Do      \nParticipan",
+    "ts must prepare a technical report that includes:\n1. Understanding the product category.\n2. Identifying key performance parameters.\n3. Studying existing practices or issues in the market.\n4. Proposing testing methods.\n5. Suggesting performance benchmarks for standardization.\nSuggested     Report     Structure      \nParticipants are advised to follo",
+    "w the structure below.\n1. Title Page\nExample:\nPre-Standardisation Study on Performance and Accuracy of Fitness Wearables\nPrepared by:\nTeam Name / Participants\nEvent:\nDraft Standards Preparation Activity\nOrganized by:\nFOSS NIT Srinagar in collaboration with BIS\n2. Introduction\nExplain:\n What fitness wearables are\n Their role in health and fitness",
+    "monitoring\n Why standardization is important\n3. Scope of the Study\nDefine which devices are included. \nExample:\n Smartwatches\\n\\n Fitness bands\n Health monitoring wearables\nParameters considered:\n Heart rate monitoring\n Step counting\n Sleep tracking\n GPS tracking\n Battery performance\n 4. Existing Practices\nParticipants may briefly discuss:",
+    " Current market practices\n Accuracy claims by manufacturers\n Problems in measurement reliability\n5.Key Performance Parameters\nExamples include:\n Heart Rate Accuracy\n Step Counting Accuracy\n Sleep Tracking Reliability\n GPS Accuracy\n Battery L",
+    "ife\n6.Proposed Testing Methodology\nParticipants should describe how each parameter should be tested. \nExample:\nHeart Rate Testing\nComparison with medical grade ECG devices\nStep Count Testing\nCompare actual steps vs device recorded steps\nSleep Tracking\nCompare wearable data with sleep monitoring systems\n7.Proposed Performance Benchmarks \nParticipant",
+    "s should define acceptable limits.\\n\\nExample:\nHeart Rate Accuracy\n±5 BPM\nStep Count Accuracy\n±3% error margin\nBattery Life\nMinimum 24 hours operation\n8. Data Reliability and Safety\nDiscuss:\n Sensor calibration\n Data reliability\n Privacy considerations\n9. Conclusion\nSummarize:\n Importance of standardization\n Benefits for consumers and manufact",
+    "urers\n10.Submission Instructions :\nParticipants must submit their report in PDF format.\nSubmission will be done through the Google Form shared via email. \nSubmission Link:\nhttps://forms.gle/Us5zR6FFGeNevcSs6  \nThe submission deadline is 12 March 2026.  \nImportant     Rules      \n The report will be checked for plagiarism and AI-generated content.",
+    " The similarity score must be below 20%.\n Submissions exceeding the limit may be disqualified.\nEvaluation     Criteria      \nSubmissions will be evaluated based on:\n Understanding of the topic\n Quality of proposed standards\\n\\n Technical clarity\n Practical testing methods\n Structure and presentation\nPrizes\n1st Prize - 2,000₹\n2nd Prize - 1,50",
+    "0₹\n3rd Prize - 1,000₹\nCertificates will be provided to all participants!\nReference     Material      \nParticipants should refer to the attached Pre-Standardisation Study case studies shared in the \ndrive link with this document. These references provide an idea of:\n Structure of a standard study\n Level of technical detail expected\n How standards",
+    "are proposed\nDrive Link:\nhttps://drive.google.com/drive/folders/1GPTRElPtDFSpJA0gA4nU3i4jFcRg_7J8?usp=drive_link  \\n\\n"
   ],
   "metadata": [
     {
@@ -191,6 +245,222 @@
     {
       "title": "BIS Regional and Branch Offices",
       "source": "https://www.bis.gov.in/contact/"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
+    },
+    {
+      "title": "FOSS x BIS Hackathon - AI Chatbot Challenge & Standards Activity",
+      "source": "bis-presents-the-open-standard-summit-brochure.pdf"
     }
   ]
 }

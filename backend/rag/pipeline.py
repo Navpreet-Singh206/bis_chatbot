@@ -31,10 +31,54 @@ def cosine_similarity_numpy(query_vec, embeddings):
 
 
 def search(query, top_k=5):
-    print(f'Search debug: query="{query}", vectorizer shape={vectorizer.shape if hasattr(vectorizer, "shape") else "no shape"}, embeddings shape={embeddings.shape}')
-    query_vector = vectorizer.transform([query]).toarray()
+    # Dynamic query expansion instead of fixed BIS prefix
+    expansions = {
+        'certification': 'ISI mark product certification licence process',
+        'hallmark': 'gold silver jewellery hallmarking HUID licence',
+        'standard': 'Indian Standard IS development formulation',
+        'laboratory': 'testing calibration BIS lab recognition',
+    }
+    expanded_query = query
+    for key, expansion in expansions.items():
+        if key in query.lower():
+            expanded_query = f"{query} {expansion}"
+            break
+    else:
+        expanded_query = f"{query} BIS standards"
+    
+    print(f'Search debug: query="{query}" -> expanded="{expanded_query}"')
+    query_vector = vectorizer.transform([expanded_query]).toarray()
     similarities = cosine_similarity_numpy(query_vector, embeddings)
-    top_indices = np.argsort(similarities)[::-1][:top_k]
+    
+    # Get top 2*top_k for MMR diversity
+    candidate_indices = np.argsort(similarities)[::-1][:top_k*2]
+    
+    # Simple MMR (Maximal Marginal Relevance) for diversity
+    selected_indices = []
+    lambda_diversity = 0.5
+    
+    for cand_idx in candidate_indices:
+        if len(selected_indices) >= top_k:
+            break
+        if not selected_indices:
+            selected_indices.append(cand_idx)
+            continue
+            
+        # Diversity score - fix scalar indexing
+        diversity_score = 0
+        for sel_idx in selected_indices:
+            emb1 = embeddings[[cand_idx]]
+            emb2 = embeddings[[sel_idx]]
+            div_sim = cosine_similarity_numpy(emb1, emb2)[0]
+            diversity_score += div_sim
+        avg_diversity = diversity_score / len(selected_indices)
+        
+        marginal_relevance = similarities[cand_idx] * (1 - lambda_diversity) + lambda_diversity * (1 - avg_diversity)
+        
+        if marginal_relevance > similarities[selected_indices[-1]]:
+            selected_indices.append(cand_idx)
+    
+    top_indices = selected_indices
 
     results = []
     for idx in top_indices:
